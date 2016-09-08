@@ -1,4 +1,7 @@
 class Project
+  attr_accessor :name
+  attr_reader :funding, :target_funding
+
   def initialize(name, funding, target_funding)
     @name = name
     @funding = funding
@@ -16,16 +19,18 @@ class Project
   end
 
   def to_s
-    "#{@name} has $#{@funding} in funding towards a goal of $#{@target_funding}."
+    "#{@name} has $#{@funding} in funding towards a goal of $#{@target_funding}, i.e. $#{funding_needed} is still needed."
   end
-end
 
-def project_info(name, funding=1000)
-  "#{name} has $#{funding} in funding."
+  def funding_needed
+    @target_funding - @funding
+  end
 end
 
 project1 = Project.new("Project LMN", 500, 3000)
 puts project1
+project1.name = "Project PQR"
+puts project1.name
 
 project2 = Project.new("Project XYZ", 25, 75)
 puts project2
