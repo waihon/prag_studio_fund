@@ -27,35 +27,37 @@ class Project
   end
 end
 
+class FundingProgram
+  attr_reader name
+
+  def initialize(name)
+    @name = name
+    @projects = []
+  end
+
+  def add_project(project)
+    @projects << project
+  end
+
+  def request_funding
+    puts "There are #{@projects.size} projects in #{@name}:"
+    @projects.each do |project|
+      puts project.name
+      puts project.target_funding
+      project.remove_fund
+      project.add_fund
+      project.add_fund
+      puts project
+    end
+  end
+end
+
 project1 = Project.new("Project LMN", 500, 3000)
-puts project1
-project1.name = "Project PQR"
-puts project1.name
-
 project2 = Project.new("Project XYZ", 25, 75)
-puts project2
-
-project1.remove_fund
-project2.add_fund
-puts project1
-puts project2
-
 project3 = Project.new("Project SAAS", 100, 5000)
 
-projects = [project1, project2, project3]
-puts "There are #{projects.size} projects that require funding:"
-projects.each do |project|
-  puts project.name
-  puts project.target_funding
-  project.remove_fund
-  project.add_fund
-  project.add_fund
-  puts project
-end
-
-projects.pop
-project4 = Project.new("Project HDL", 50, 1500)
-projects.push(project4)
-projects.each do |prj|
-  puts prj
-end
+vc_friendly = FundingProgram.new("VC-Friendly Start-up Projects")
+vc_friendly.add_project(project1)
+vc_friendly.add_project(project2)
+vc_friendly.add_project(project3)
+vc_friendly.request_funding
