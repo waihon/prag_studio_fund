@@ -39,3 +39,23 @@ project1.remove_fund
 project2.add_fund
 puts project1
 puts project2
+
+project3 = Project.new("Project SAAS", 100, 5000)
+
+projects = [project1, project2, project3]
+puts "There are #{projects.size} projects that require funding:"
+projects.each do |project|
+  puts project.name
+  puts project.target_funding
+  project.remove_fund
+  project.add_fund
+  project.add_fund
+  puts project
+end
+
+projects.pop
+project4 = Project.new("Project HDL", 50, 1500)
+projects.push(project4)
+projects.each do |prj|
+  puts prj
+end
