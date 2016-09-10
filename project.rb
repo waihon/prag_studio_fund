@@ -2,10 +2,10 @@ class Project
   attr_accessor :name
   attr_reader :funding, :target_funding
 
-  def initialize(name, funding, target_funding)
+  def initialize(name, target_funding, funding=0)
     @name = name
-    @funding = funding
     @target_funding = target_funding
+    @funding = funding    
   end
 
   def add_fund(funding=25)

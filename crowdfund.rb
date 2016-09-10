@@ -1,9 +1,9 @@
 require_relative 'fundrequest'
 require_relative 'project'
 
-project1 = Project.new("Project LMN", 500, 3000)
-project2 = Project.new("Project XYZ", 25, 75)
-project3 = Project.new("Project SAAS", 100, 5000)
+project1 = Project.new("Project LMN", 3000, 500)
+project2 = Project.new("Project XYZ", 75, 25)
+project3 = Project.new("Project SAAS", 1000)
 
 vc_friendly = FundRequest.new("VC-Friendly Start-up Projects")
 vc_friendly.add_project(project1)
