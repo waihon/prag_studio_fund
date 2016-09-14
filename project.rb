@@ -25,4 +25,8 @@ class Project
   def funding_needed
     @target_funding - @funding
   end
+
+  def fully_funded?
+    funding_needed <= 0
+  end
 end

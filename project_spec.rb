@@ -39,4 +39,32 @@ describe Project do
       expect(@project.funding).to eq(0)
     end
   end
+
+  context "with sufficient funding" do
+    before do
+      @target_funding = 1000
+      @initial_funding = 100
+      @project = Project.new("Project XYZ", @target_funding, @initial_funding)
+    end
+
+    it "is fully funded" do
+      @project.add_fund(@target_funding - @initial_funding)
+
+      expect(@project).to be_fully_funded
+    end
+  end
+
+  context "with insufficient funding" do
+    before do
+      @target_funding = 1000
+      @initial_funding = 100
+      @project = Project.new("Project XYZ", @target_funding, @initial_funding)
+    end
+
+    it "is not fully funded" do
+      @project.add_fund(@target_funding - @initial_funding - 1)
+
+      expect(@project).not_to be_fully_funded
+    end
+  end
 end
