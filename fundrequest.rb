@@ -1,5 +1,6 @@
 require_relative 'die'
 require_relative 'project'
+require_relative 'funding_round'
 
 class FundRequest
   attr_reader name
@@ -18,12 +19,7 @@ class FundRequest
     @projects.each do |project|
       puts project.name
       puts project.target_funding
-      die = Die.new
-      if die.roll.even?
-        project.add_fund
-      else
-        project.remove_fund
-      end
+      FundingRound.take_turn(project)
       puts project
     end
   end
