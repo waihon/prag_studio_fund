@@ -29,4 +29,8 @@ class Project
   def fully_funded?
     funding_needed <= 0
   end
+
+  def <=>(other)
+    other.funding_needed <=> funding_needed
+  end
 end

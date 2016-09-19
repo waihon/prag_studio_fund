@@ -9,4 +9,5 @@ vc_friendly = FundRequest.new("VC-Friendly Start-up Projects")
 vc_friendly.add_project(project1)
 vc_friendly.add_project(project2)
 vc_friendly.add_project(project3)
-vc_friendly.request_funding
+vc_friendly.request_funding(10)
+vc_friendly.print_stats
