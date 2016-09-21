@@ -1,6 +1,7 @@
 require_relative 'die'
 require_relative 'project'
 require_relative 'funding_round'
+require_relative 'pledge_pool'
 
 class FundRequest
   attr_reader name
@@ -20,7 +21,14 @@ class FundRequest
       puts project.name
     end
 
-    1.upto(rounds) do
+    pledges = PledgePool::PLEDGES
+    puts "\nThere are #{pledges.size} possible pledge amounts:"
+    pledges.each do |pledge|
+      puts "A #{pledge.name} pledge is worth $#{pledge.amount}"
+    end
+
+    1.upto(rounds) do |n|
+      puts "\nRound #{n}:"
       @projects.each do |project|
         FundingRound.take_turn(project)
       end
