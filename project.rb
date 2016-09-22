@@ -6,6 +6,7 @@ class Project
     @name = name
     @target_funding = target_funding
     @funding = funding    
+    @pledges_received = Hash.new(0)
   end
 
   def add_fund(funding=25)
@@ -33,4 +34,12 @@ class Project
   def <=>(other)
     other.funding_needed <=> funding_needed
   end
+
+  def received_pledge(pledge)
+    @pledges_received[pledge.name] += pledge.amount
+    @funding += pledge.amount
+    puts "#{@name} received a #{pledge.name} pledge worth $#{pledge.amount}."
+    puts "#{@name}'s pledges: #{@pledges_received}"
+  end
+
 end
