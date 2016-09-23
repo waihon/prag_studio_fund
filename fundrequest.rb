@@ -36,6 +36,14 @@ class FundRequest
   end
 
   def print_stats
+    @projects.each do |project|
+      puts "\n#{project.name}'s pledges:"
+      project.each_received_pledge do |pledge|
+        puts "$#{pledge.amount} in #{pledge.name} pledges"
+      end
+      puts "$#{project.total_pledges} in total pledges"
+    end
+
     fully_funded, under_funded = @projects.partition { |project| project.fully_funded? }
 
     puts "\n#{@name} Statistics:"

@@ -1,5 +1,6 @@
 require_relative 'spec_helper'
 require_relative 'project'
+require_relative 'pledge_pool'
 
 describe Project do
   before do
@@ -66,5 +67,43 @@ describe Project do
 
       expect(@project).not_to be_fully_funded
     end
+  end
+
+  it "computes total pledges as the sum of all pledge amount" do
+    expect(@project.total_pledges).to be_zero
+
+    @project.received_pledge(Pledge.new(:bronze, 50))
+
+    expect(@project.total_pledges).to eq(50)
+
+    @project.received_pledge(Pledge.new(:silver, 75))
+
+    expect(@project.total_pledges).to eq(125)
+
+    @project.received_pledge(Pledge.new(:gold, 100))
+
+    expect(@project.total_pledges).to eq(225)
+  end
+  
+  it "yields each pledge received and its total pledges" do
+    @project.received_pledge(Pledge.new(:gold, 100))
+    @project.received_pledge(Pledge.new(:gold, 100))
+    @project.received_pledge(Pledge.new(:silver, 75))
+    @project.received_pledge(Pledge.new(:bronze, 50))
+    @project.received_pledge(Pledge.new(:bronze, 50))
+    @project.received_pledge(Pledge.new(:bronze, 50))
+    @project.received_pledge(Pledge.new(:bronze, 50))
+    @project.received_pledge(Pledge.new(:bronze, 50))
+
+    yielded = []
+    @project.each_received_pledge do |pledge|
+      yielded << pledge
+    end
+
+    expect(yielded).to eq([
+      Pledge.new(:gold, 200),
+      Pledge.new(:silver, 75),
+      Pledge.new(:bronze, 250)
+    ])
   end
 end
