@@ -49,16 +49,8 @@ class FundRequest
 
     puts "\n#{@name} Statistics:"
 
-    # puts "\n#{fully_funded_projects.size} fully-funded projects:"
-    # fully_funded_projects.each do |project|
-    #   print_name_and_funding(project)
-    # end
     print_fully_funded_projects
 
-    # puts "\n#{under_funded_projects.size} under-funded projects:"
-    # under_funded_projects.sort.each do |project|
-    #   print_name_and_funding(project)
-    # end
     print_under_funded_projects
   end
 

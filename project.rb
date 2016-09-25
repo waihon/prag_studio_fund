@@ -9,13 +9,13 @@ class Project
     @pledges_received = Hash.new(0)
   end
 
-  def add_fund(funding=25)
-    @funding += funding
+  def add_fund(amount=25)
+    @funding += amount
     puts "#{@name} got more funds!"
   end
 
-  def remove_fund(funding=15)
-    @funding -= funding
+  def remove_fund(amount=15)
+    @funding -= amount
     puts "#{@name} lost some funds!"
   end
 
