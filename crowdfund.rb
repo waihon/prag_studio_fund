@@ -14,7 +14,7 @@ vc_friendly.add_project(matching_project)
 
 
 loop do
-  puts "How many rounds of funding requests? ('quit' to exit)"
+  puts "\nHow many rounds of funding requests? ('quit' to exit)"
   answer = gets.chomp.downcase
   case answer
   when /^\d+$/  # 1 or more digits
