@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+require '../lib/crowdfund/fundrequest'
+require '../lib/crowdfund/project'
+require '../lib/crowdfund/grant_project'
+require '../lib/crowdfund/matching_project'
+
+
+vc_friendly = CrowdFund::FundRequest.new("VC-Friendly Start-up Projects")
+default_project_file = File.join(File.dirname(__FILE__), "projects.csv")
+vc_friendly.load_projects(ARGV.shift || default_project_file)
+
+grant_project = CrowdFund::GrantProject.new("Project Grant", 1000, 150)
+matching_project = CrowdFund::MatchingProject.new("Projecting Matching", 1500, 300)
+vc_friendly.add_project(grant_project)
+vc_friendly.add_project(matching_project)
+
+
+loop do
+  puts "\nHow many rounds of funding requests? ('quit' to exit)"
+  answer = gets.chomp.downcase
+  case answer
+  when /^\d+$/  # 1 or more digits
+    vc_friendly.request_funding(Integer(answer))
+  when 'quit', 'exit'
+    vc_friendly.print_stats
+    break
+  else
+    puts "Please enter a number or 'quit'"
+  end
+end
+
+vc_friendly.save_projects
